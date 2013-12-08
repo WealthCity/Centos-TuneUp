@@ -29,7 +29,7 @@
 ## Set common variables
 ##################################################################
 
-. /usr/local/els/variables.sh
+. /variables.sh
 
 if [ -e /usr/local/bin/php ]; then
   PHPBINARY=/usr/local/bin/php

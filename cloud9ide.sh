@@ -25,7 +25,8 @@ sm install
 chown -R www-data:www-data .
 cd ..
 mv cloud9 /var/www
-su www-data
+#su www-data
+su root
 # Run Web server and set /var/www as the base directory for the IDE
 # The parameter -l 0.0.0.0 allows you to connect from hosts other than localhost (can be dangerous)
 /var/www/cloud9/bin/cloud9.sh -w /var/www

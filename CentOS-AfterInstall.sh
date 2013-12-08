@@ -453,7 +453,7 @@ print_usage() {
 
 cat << EOF
 
-Usage: $0 [-IRVUOSMAPG]
+Usage: $0 [-IRUOSMAPG]
 
 This script performs initial setting of the system and common services
 after fresh install of CentOS minimal Linux distribution.
@@ -489,7 +489,7 @@ if [ $# -eq 0 ]
 	then print_usage
 fi
 
-OPTIONS="IRVUOSMAPG"
+OPTIONS="IRUOSMAPG"
 
 while getopts ${OPTIONS} optname
 do

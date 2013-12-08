@@ -462,7 +462,6 @@ OPTIONS:
 
   -I   Install prerequisities
   -R   Set up repositories
-  -V   Install Virtualmin GPL
   -U   Update system and instal additional packages
   -O   Harden Operating System settings
   -S   Secure OpenSSH server settings

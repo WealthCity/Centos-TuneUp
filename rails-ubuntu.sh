@@ -14,22 +14,22 @@ echo "====================================================="
 sudo apt-get update
 
 echo "====================================================="
-echo "Installing RVM"
+echo "Installing RVM & Ruby Latest-Stable"
 echo "====================================================="
 
 #\curl -sSL https://get.rvm.io | bash -s -- --autolibs=read-fail
 #curl -L https://get.rvm.io | bash -s stable
 \curl -sSL https://get.rvm.io | bash -s stable --ruby
+source /usr/local/rvm/scripts/rvm
 source ~/.rvm/scripts/rvm
 echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
-rvm requirements
 
 echo "====================================================="
 echo "Installing Ruby"
 echo "====================================================="
 
-rvm install 2.1.0
-rvm use 2.1.0 --default
+#rvm install 2.1.0
+#rvm use 2.1.0 --default
 
 echo "====================================================="
 echo "Installing Rails"
@@ -43,7 +43,9 @@ echo "====================================================="
 echo "Installing Mysql gem"
 echo "====================================================="
 
-gem install mysql -- --with-mysql-config=/usr/lib/mysql/mysql_config
+#gem install mysql -- --with-mysql-config=/usr/lib/mysql/mysql_config
+#gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+gem install mysql2
 
 echo "====================================================="
 echo "Installing Passenger"

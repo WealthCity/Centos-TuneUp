@@ -37,22 +37,6 @@ echo "You appear to have a control panel already installed on your server; This 
     exit
 fi
 
-# Ensure the installer is launched and can only be launched on Ubuntu 12.04
-BITS=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
-if [ -f /etc/lsb-release ]; then
-OS=$(cat /etc/lsb-release | grep DISTRIB_ID | sed 's/^.*=//')
-  VER=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | sed 's/^.*=//')
-else
-OS=$(uname -s)
-  VER=$(uname -r)
-fi
-echo "Detected : $OS $VER $BITS"
-if [ "$OS" = "Ubuntu" ] && [ "$VER" = "12.10" ]; then
-echo "Ok."
-else
-echo "Sorry, this installer only supports the installation of ZPanel on Ubuntu 12.04."
-  exit 1;
-fi
 
 # Set custom logging methods so we create a log file in the current working directory.
 logfile=$$.log

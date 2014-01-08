@@ -68,3 +68,33 @@ Please edit your Apache configuration file, and add these lines:
 
 After you restart Apache, you are ready to deploy any number of web
 applications on Apache, with a minimum amount of configuration!
+
+
+Deploying a web application: an example
+
+Suppose you have a web application in /somewhere. Add a virtual host to your
+Apache configuration file and set its DocumentRoot to /somewhere/public:
+
+   <VirtualHost *:80>
+      ServerName www.yourhost.com
+      # !!! Be sure to point DocumentRoot to 'public'!
+      DocumentRoot /somewhere/public
+      <Directory /somewhere/public>
+         # This relaxes Apache security settings.
+         AllowOverride all
+         # MultiViews must be turned off.
+         Options -MultiViews
+      </Directory>
+   </VirtualHost>
+
+And that's it! You may also want to check the Users Guide for security and
+optimization tips, troubleshooting and other useful information:
+
+  /usr/local/rvm/gems/ruby-2.1.0/gems/passenger-4.0.33/doc/Users guide Apache.html
+  http://www.modrails.com/documentation/Users%20guide%20Apache.html
+
+Enjoy Phusion Passenger, a product of Phusion (www.phusion.nl) :-)
+https://www.phusionpassenger.com
+
+Phusion Passenger is a trademark of Hongli Lai & Ninh Bui.
+

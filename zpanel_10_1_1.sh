@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # OS VERSION: CentOS 6.4+ Minimal
 # ARCH: x32_64
 

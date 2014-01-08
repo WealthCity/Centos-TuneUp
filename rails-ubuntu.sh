@@ -17,8 +17,9 @@ echo "====================================================="
 echo "Installing RVM"
 echo "====================================================="
 
-\curl -sSL https://get.rvm.io | bash -s -- --autolibs=read-fail
+#\curl -sSL https://get.rvm.io | bash -s -- --autolibs=read-fail
 #curl -L https://get.rvm.io | bash -s stable
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
 rvm requirements

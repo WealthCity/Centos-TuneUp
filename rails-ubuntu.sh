@@ -1,7 +1,5 @@
 #!/bin/bash
-# BASH SCRIPT TO SETUP ZPANEL & RAILS DEVELOPMENT ENVIRONMENT IN UBUNTU
-
-curl -Ss https://raw.github.com/zpanel/installers/master/install/Ubuntu-12_04/10_1_1.sh | bash
+# BASH SCRIPT TO SETUP RAILS DEVELOPMENT ENVIRONMENT IN UBUNTU
 
 echo "====================================================="
 echo "Installing dependencies"

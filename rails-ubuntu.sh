@@ -21,13 +21,14 @@ echo "====================================================="
 #curl -L https://get.rvm.io | bash -s stable
 source ~/.rvm/scripts/rvm
 echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
+rvm requirements
 
 echo "====================================================="
 echo "Installing Ruby"
 echo "====================================================="
 
-rvm install 2.0.0-p353
-rvm use 2.0.0-p353 --default
+rvm install 2.1.0
+rvm use 2.1.0 --default
 
 echo "====================================================="
 echo "Installing Rails"

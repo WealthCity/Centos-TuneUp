@@ -18,7 +18,6 @@ echo "Installing RVM"
 echo "====================================================="
 
 curl -L https://get.rvm.io | bash -s stable
-rvm autolibs rvm_pkg install openssl
 source ~/.rvm/scripts/rvm
 echo "source ~/.rvm/scripts/rvm" >> ~/.bashrc
 

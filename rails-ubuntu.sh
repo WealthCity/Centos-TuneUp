@@ -57,3 +57,14 @@ passenger-install-apache2-module
 service apache2 restart
 
 echo "Installation Completed!"
+
+The Apache 2 module was successfully installed.
+
+Please edit your Apache configuration file, and add these lines:
+
+   LoadModule passenger_module /usr/local/rvm/gems/ruby-2.1.0/gems/passenger-4.0
+   PassengerRoot /usr/local/rvm/gems/ruby-2.1.0/gems/passenger-4.0.33
+   PassengerDefaultRuby /usr/local/rvm/wrappers/ruby-2.1.0/ruby
+
+After you restart Apache, you are ready to deploy any number of web
+applications on Apache, with a minimum amount of configuration!

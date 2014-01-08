@@ -1,0 +1,111 @@
+Guacamole 0.8.3 Instructions
+
+These instructions were written for Ubuntu 12.04 LTS, herein referred to as guac-server.
+Install Tomcat Server and Pre-Requisite Packages
+
+Once your Ubuntu 12.04 LTS VM has been installed and the network has been configured, you will need to install the tomcat server and the latest guacamole release. As of this writing, we are using the binary (.war) of Guacamole 0.8.3.
+
+    Install the tomcat6 server
+    # apt-get update
+    # apt-get install tomcat6
+    You will need to use the following commands to install all of the pre-requisites.
+    # apt-get install build-essential
+    # apt-get install automake
+    # apt-get install libtool
+    # apt-get install shtool
+    # apt-get install checkinstall
+    # apt-get install git
+    # apt-get install libcairo-dev
+    # apt-get install libfreerdp-dev
+    # apt-get install libvncserver0
+
+Install guacamole-client binary
+
+The guacamole-client binary is a java application (powered by tomcat6) that provides the front-end UI for Guacamole and is what your users interact with.
+
+    Using the browser on your PC, navigate to the sourceforge repository.
+    www.sourceforget.net/projects/guacamole/files/current/binary
+
+    Locate version 0.8.3 and download it (you want the .war file, not the .tar.gz).
+    SFTP to guac-server and navigate to /tmp
+    Upload guacamole-*.war to the /tmp directory. The * represents a wildcard, used solely for short-hand documentation.
+    SSH to guac-server and cd /tmp.
+
+    Use the following commands to create your tomcat6 webapps folder structure with symbolic links (ln = link symbolic) and copy the Guacamole binary into the folder.
+    # mv /tmp/guac*.war /tmp/guacamole.war
+    # cd /usr/share/tomcat6
+    # rm -r webapps (It's okay if this errors out, move on to the next step)
+    # ln -s /var/lib/tomcat6/conf conf
+    # ln -s /var/lib/tomcat6/webapps webapps
+    # chmod 777 /usr/share/tomcat6/webapps
+    # cp /tmp/guac*.war /usr/share/tomcat6/webapps
+
+    Restart the tomcat server to initialize the Guacamole client UI interface.
+    # service tomcat6 restart
+
+    You should now be able to access the Guacamole login page.
+    http://guac-server:8080/guacamole
+
+Compile guacamole-server from source
+
+Before accessing an RDP session, you will need to compile the guacamole-server package to allow back-end access to RDP sessions.
+
+    Using the browser on your PC, navigate to the sourceforge repository.
+    www.sourceforge.net/projects/guacamole/files/current/binary
+    Locate the guacamole-server-0.8.3.tar.gz file.
+    Download the tar file and upload via SFTP to guac-server in the /tmp directory.
+    SSH to guac-server and use the following commands to compile the guacamole-server package.
+    # cd /tmp
+    # tar xvzf guacamole-server*.tar.gz
+    # cd guacamole-server*
+    Run the configure script with the option to install the daemon.
+    # ./configure --with-init-dir=/etc/init.d
+    Once configure is finished, just type "make" and the guacamole-server will be compiled.
+    # make
+    Run the make install command to install the compiled guacamole server. Use the ldconfig command to update your systems cache.
+    # make install
+    # ldconfig
+
+Configure Guacamole Environment
+
+    Create the guacamole.properties file.
+    # mkdir /etc/guacamole
+    # nano guacamole.properties
+
+    Copy the following text into the guacamole.properties file
+    # Hostname and port of guacamole proxy (guacamole-server)
+    guacd-hostname: localhost
+    guacd-port: 4822
+
+    # Location to read extra .jar's from
+    lib-directory: /var/lib/guacamole/classpath
+    # Authentication Method
+    auth-provider: net.sourceforge.guacamole.net.basic.BasicFileAuthenticationProvider
+    basic-user-mapping: /etc/guacamole/user-mapping.xml
+
+    Press Ctrl+X and press "Y" to save your changes.
+    Create your first connection in user-mapping.xml
+    # nano user-mapping.xml
+
+<user-mapping>
+<authorize username="WEBUSERNAME" password="WEBPASSWORD">
+<protocol>rdp</protocol>
+<param name="hostname">IPADDR</param>
+<param name="port">3389</param>
+<param name="username">RDPUSER</param>
+<param name="password">RDPPASS</param>
+</authorize>
+</user-mapping>
+
+    Press Ctrl+X and press "Y" to save your changes.
+    Create a symbolic link for the guacamole.properties file inside the tomcat configuration.
+    # ln -s /etc/guacamole /usr/share/tomcat6/.guacamole
+    Create the user-mapping.xml in the /etc/guacamole folder.
+    # cd /etc/guacamole
+    Restart the tomcat server and guacd process.
+    # /etc/init.d/tomcat6 restart
+    # /etc/init.d/guacd restart
+
+You should now be able to access the Guacamole login page at http://guac-server:8080/guacamole. You will be able to login using the credentials defined in the user-mapping.xml file above.
+
+You have just finished installing Guacamole and are now ready to test it in the real world. 

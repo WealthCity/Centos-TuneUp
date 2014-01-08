@@ -1,6 +1,9 @@
 #!/bin/bash
 # BASH SCRIPT TO SETUP RAILS DEVELOPMENT ENVIRONMENT IN UBUNTU
 
+sudo apt-get update
+sudo apt-get install curl
+
 echo "====================================================="
 echo "Installing dependencies"
 echo "====================================================="
